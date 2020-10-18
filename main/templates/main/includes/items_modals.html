@@ -1,0 +1,64 @@
+<!-- More Info -->
+<div class="modal fade" id="Modal-MoreInfo{{ item.pk }}"
+     tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel{{ item.pk }}">
+            {{ item.name }}
+        </h5>
+        <button type="button" class="close"
+                data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ item.description }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+                data-dismiss="modal">Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Purchase Item -->
+<div class="modal fade" id="Modal-PurchaseConfirm{{ item.pk }}"
+     tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel{{ item.pk }}">
+            Are you sure you want to buy {{ item.name }} ?
+        </h5>
+        <button type="button" class="close"
+                data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form method="POST">
+              {% csrf_token %}
+              <h4 class="text-center">
+                  {{ item.name }} costs {{ item.price }}$
+              </h4>
+              <br>
+              <h6 class="text-center">
+                  By clicking Purchase, you will buy this item from the market
+              </h6>
+              <br>
+              <input type="hidden" name="purchased-item" value="{{ item.name }}">
+              <button type="submit" class="btn btn-outline-success btn-block">Purchase</button>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+                data-dismiss="modal">Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
