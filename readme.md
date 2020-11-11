@@ -1,4 +1,4 @@
-# Jim Shaped Coding Market Django Project
+# Jim Shaped Coding Django Project hosted on TraversyMedia Youtube Channel
 
 ## This Readme file explains two ways to execute this website on your local environment
 

@@ -8,35 +8,27 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <title>
-        {% block title %}
-            Default Title
-        {% endblock %}
+      {% block title %}
+
+      {% endblock %}
     </title>
   </head>
-  
-  <body>
-    <!-- Navbar that will appear in each of our templates -->
-    {% include 'main/includes/navbar.html' %}
-    {% if messages %}
-        {% for message in messages %}
-            {% if message.tags == 'error' %}
-                <div class="alert alert-danger">
-                    {{ message }}
-                </div>
-            {% else %}
-                 <div class="alert alert-{{ message.tags }}">
-                    {{ message }}
-                </div>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-    {% block pageheader %}
 
+  <body>
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+    {% include 'main/includes/navbar.html' %}
+    {% block pageheader %}
     {% endblock %}
     <div class="container">
-        {% block content %}
+      {% block content %}
 
-        {% endblock %}
+      {% endblock %}
     </div>
   <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
