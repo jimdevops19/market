@@ -15,13 +15,21 @@
   </head>
 
   <body>
+    
     {% if messages %}
       {% for message in messages %}
-        <div class="alert">
-          {{ message }}
-        </div>
+    
+          {%if message.level == DEFAULT_MESSAGE_LEVELS.ERROR%}
+              <pre><div class="alert alert-danger" role="alert">{{message}}</div></pre>
+          {%endif%}
+    
+          {%if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS%}
+              <div class="alert alert-success" role="alert"> {{message}} </div>
+          {%endif%}
+   
       {% endfor %}
     {% endif %}
+    
     {% include 'main/includes/navbar.html' %}
     {% block pageheader %}
     {% endblock %}
