@@ -30,7 +30,7 @@ def loginpage(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(username=username, password=password)
-        if user is not None:
+        if user:
             login(request, user)
             messages.success(request, f'You are logged in as {user.username}')
             return redirect('items')
@@ -53,7 +53,11 @@ def registerpage(request):
             messages.success(request, f'You have registered your account successfully! Logged in as {user.username}')
             return redirect('home')
         else:
-            messages.error(request, form.errors)
+            errors = ''
+            for error_type in form.errors.values():
+                for error in error_type:
+                    errors += error + '\n'
+            messages.error(request, errors)
             return redirect('register')
 
 def logoutpage(request):
