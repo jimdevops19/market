@@ -13,14 +13,17 @@ def itemspage(request):
         items = Item.objects.filter(owner=None)
         return render(request, template_name='main/items.html', context= {'items' : items})
     if request.method == 'POST':
-        purchased_item = request.POST.get('purchased-item')
-        if purchased_item:
-            purchased_item_object = Item.objects.get(name=purchased_item)
-            purchased_item_object.owner = request.user
-            purchased_item_object.save()
-            messages.success(request, f'Congratulations. You just bought {purchased_item_object.name} for {purchased_item_object.price}')
-
-        return redirect('items')
+        if request.user.is_authenticated:
+            purchased_item = request.POST.get('purchased-item')
+            if purchased_item:
+                purchased_item_object = Item.objects.get(name=purchased_item)
+                purchased_item_object.owner = request.user
+                purchased_item_object.save()
+                messages.success(request, f'Congratulations. You just bought {purchased_item_object.name} for {purchased_item_object.price}')
+            return redirect('items')
+        else:
+            messages.error(request,'Please login first to place your order.')
+            return redirect('login')
 
 def loginpage(request):
     if request.method == 'GET':
